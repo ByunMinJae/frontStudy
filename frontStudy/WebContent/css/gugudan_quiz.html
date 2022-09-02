@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+
+body {
+	background-color: #a2a2a2;
+}
+
+input {
+	border: 2px solid rgba(0, 0, 0, 0.6);
+	background-color: #dadad3;
+}
+
+h1 {	margin: 0px; }
+h1#quiz {
+	display: block;
+	text-align: center;
+	width: 100px;
+	margin: 0 auto;
+} 
+
+input.count {
+	display: inline-block;
+	border: 2px solid rgba(0, 0, 0, 0.6);
+	height: 15px;
+}
+
+#n1, #n2 {	width: 80px; }
+
+#answer {	width: 90px; }
+
+#calc {
+	width: 75px;
+}
+
+#correct, #incorrect {	width: 103px; }
+
+#border {
+	border: 2px solid #ccc;
+	display: block;
+	padding: 5px;
+	width: 200px;
+	margin: 100px auto;
+	box-shadow: 7px 7px 3px gray;
+}
+
+</style>
+
+<script type="text/javascript">
+window.onload = function() {
+	/* 초기난수 생성 */
+	init()
+	
+	calc.onclick = timeFunc
+	
+	answer.onkeydown = pressEnter
+	
+}
+
+function pressEnter() {
+	/* 엔터키 누르면 결과확인 */
+	if(event.keyCode == 13) {
+		timeFunc()
+	}
+}
+
+function init() {
+	/* 랜덤 숫자 생성 */
+	n1.value = randomNumber(8, 2)
+	n2.value = randomNumber(9, 1)
+	
+	/* 정답 초기화 */
+	answer.value = ""
+	
+	/* 정답 입력창 포커스 */
+	answer.focus()
+}
+
+function randomNumber(count, start) {
+	return Math.floor( Math.random() * count ) + start
+}
+
+function timeFunc() {
+	if( answer.value == '' ) {
+		alert("정답을 입력해 주세요")
+		return
+	}
+
+	var result = n1.value * n2.value
+	
+	if( result == answer.value ) {
+		correct.value++
+	} else {
+		incorrect.value++
+	}
+	
+	/* 초기화 */
+	init()
+}
+</script>
+
+</head>
+<body>
+
+<div id="border">
+<h1>TIMES TABLE</h1>
+<h1 id="quiz">QUIZ</h1>
+<hr>
+
+<input type="text" id="n1"> x <input type="text" id="n2"><br><br>
+
+= <input type="text" id="answer">
+
+<input type="button" value="Check" id="calc"><br><br>
+
+correct : <input type="text" id="correct" value="0"><br>
+incorrect : <input type="text" id="incorrect" value="0"> 
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
